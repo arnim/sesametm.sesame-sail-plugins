@@ -73,6 +73,6 @@
 	</distributionManagement>
 
 	<modules>
-		<module>test</module>
+		<module>plugintest</module>
 	</modules>
 </project>

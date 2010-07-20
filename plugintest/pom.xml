@@ -10,9 +10,9 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.topicmapslab.sesame-sail-tmapi-plugins</groupId>
-	<artifactId>test</artifactId>
+	<artifactId>plugintest</artifactId>
 	<version>${project.parent.version}</version>
-	<name>Test</name>
+	<name>plugintest</name>
 	<description>Test plugin</description>
 
 	<build>
