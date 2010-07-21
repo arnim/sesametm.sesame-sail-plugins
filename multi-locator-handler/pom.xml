@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>de.topicmapslab</groupId>
+		<artifactId>sesame-sail-tmapi-plugins</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.topicmapslab.sesame-sail-tmapi-plugins</groupId>
+	<artifactId>multi-locator-handler</artifactId>
+	<version>${project.parent.version}</version>
+	<name>multi-locator-handler</name>
+	<description>Plugin to handle multiple locators on a Topic</description>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>META-INF/services</directory>
+				<targetPath>META-INF/services</targetPath>
+			</resource>
+		</resources>
+
+		<plugins>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		
+		
+	</dependencies>
+
+
+
+
+</project>
