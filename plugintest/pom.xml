@@ -28,6 +28,70 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>de.topicmapslab</groupId>
+			<artifactId>sesame-sail-tmapi</artifactId>
+			<version>0.0.6-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.topicmapslab</groupId>
+			<artifactId>slf4j-atrappe</artifactId>
+			<version>1.5.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+				
+        <dependency>
+            <groupId>org.tinytim</groupId>
+            <artifactId>tinytim</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+		
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-repository-sail</artifactId>
+			<version>2.3-pr1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-sail-memory</artifactId>
+			<version>2.3-pr1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-queryresultio-sparqlxml</artifactId>
+			<version>2.3-pr1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-queryparser-sparql</artifactId>
+			<version>2.3-pr1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-n3</artifactId>
+			<version>2.3-pr1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+		
+		
 	</dependencies>
 
 
