@@ -133,5 +133,6 @@
 
 	<modules>
 		<module>maiana-seealso-handler</module>
+		<module>multi-locator-handler</module>
 	</modules>
 </project>
