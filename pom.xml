@@ -73,6 +73,6 @@
 	</distributionManagement>
 
 	<modules>
-		<module>plugintest</module>
+		<module>maiana-seealso-handler</module>
 	</modules>
 </project>

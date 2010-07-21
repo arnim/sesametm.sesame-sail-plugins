@@ -10,10 +10,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.topicmapslab.sesame-sail-tmapi-plugins</groupId>
-	<artifactId>plugintest</artifactId>
+	<artifactId>maiana-seealso-handler</artifactId>
 	<version>${project.parent.version}</version>
-	<name>plugintest</name>
-	<description>Test plugin</description>
+	<name>maiana-seealso-handler</name>
+	<description>Plugin to handle rdf:seeAlso for Maiana</description>
 
 	<build>
 		<resources>

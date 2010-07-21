@@ -21,7 +21,7 @@ import de.topicmapslab.sesame.sail.tmapi.utils.TmapiStatementIterator;
  * @author Arnim Bleier
  *
  */
-public class TestPlugin implements Plugin {
+public class TestPlugin implements SailTmapiPlugin {
 	
 	private TopicMap tm;
 	private Set<Statement> statements;
