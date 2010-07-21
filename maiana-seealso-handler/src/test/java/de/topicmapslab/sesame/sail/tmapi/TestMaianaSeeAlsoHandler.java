@@ -26,7 +26,7 @@ import org.tmapi.core.TopicMapSystemFactory;
  * @author Arnim Bleier
  *
  */
-public class TestTestPlugin {
+public class TestMaianaSeeAlsoHandler {
 	
 	
 	private static TmapiStore _sail;

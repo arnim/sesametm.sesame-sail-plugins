@@ -21,23 +21,21 @@ import de.topicmapslab.sesame.sail.tmapi.utils.TmapiStatementIterator;
  * @author Arnim Bleier
  *
  */
-public class TestPlugin implements SailTmapiPlugin {
+public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 	
 	private TopicMap tm;
 	private Set<Statement> statements;
 	private TmapiStatementFactory statementFactory;
 	private TmapiStatementIterator<?> other;
 
-	public TestPlugin(){
+	public MaianaSeeAlsoHandler(){
 		
 	}
 
 	@Override
 	public void evaluate(Locator subj, Locator pred, Locator obj, TopicMap tm,
 			TmapiStatementIterator<?> other) {
-		System.out.println("evaluating ....");
-
-
+		
 		this.tm = tm;
 		this.statements = other.getStatements();
 		this.statementFactory = other.getStatementFactory();
