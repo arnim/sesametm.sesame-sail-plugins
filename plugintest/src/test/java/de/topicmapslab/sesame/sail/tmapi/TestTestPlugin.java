@@ -89,7 +89,7 @@ public class TestTestPlugin {
 				null,
 				true);
 				
-//		System.out.println(result.asList().size());
+		System.out.println(result.asList().size());
 	}
 
 	/**
