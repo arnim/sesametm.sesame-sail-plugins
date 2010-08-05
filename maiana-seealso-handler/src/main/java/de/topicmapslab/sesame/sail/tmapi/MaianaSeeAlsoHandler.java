@@ -46,53 +46,41 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 		this.statementFactory = tmapiStatementIteratior.getStatementFactory();
 		this.tmapiStatementIteratior = tmapiStatementIteratior;
 		
-//		System.out.println("hir............");
-//		System.out.println(subj);
-//		System.out.println(pred);
-//		System.out.println(obj);
-//		System.out.println(tm.getLocator().toExternalForm());
-
-		
-
-		Topic sTopic = null, oTopic = null;
-		sTopic = tmapiStatementIteratior.getTopic(subj, tm);
-		oTopic = tmapiStatementIteratior.getTopic(obj, tm);
-		
+		Topic sTopic = tmapiStatementIteratior.getTopic(subj, tm);
 		ObjectTopic objectTopic = new ObjectTopic(this, obj);
-//		System.out.println(objectTopic.getURL() + " ist da " + objectTopic.exists());
 
 		if (	(pred != null && !RDFS.SEEALSO.toString().equals(pred.toExternalForm()))
 				
 				|| (subj != null && sTopic == null )
 				
-				|| (obj != null && objectTopic.exists())
+				|| (obj != null && !objectTopic.exists())
 						) {
 
+			
 			// Q has no match in this tm
 		} else {
 
 			if (sTopic == null
-					&& oTopic == null
-					&& sTopic == null
-					&& (pred != null && pred.toExternalForm().equals(RDFS.SEEALSO.stringValue())))
+					&& (pred != null && pred.toExternalForm().equals(RDFS.SEEALSO.stringValue()))
+					&& obj == null)
 				createSameAsListxPx();
 			else if (sTopic != null
-					&& oTopic == null
-					&& (obj == null || !obj.toExternalForm().contains(
-							tm.getLocator().toExternalForm())))
+					&& obj == null 
+							)
 				createSameAsListSPX(sTopic);
 			else if (sTopic == null
 					&& objectTopic.exists()) {
 				createSameAsListXPO(obj);
 			} else if (sTopic != null
 					&& objectTopic.exists())
-				createTypeSameAsSPO(sTopic, obj);
+				createTypeSameAsSPO(sTopic, objectTopic);
 			
 			else if (subj == null
 					&& obj == null
 					&& pred == null)
 				createSameAsListxPx();
-
+			else 
+				System.out.println("YOu schould never read This form " + getClass());
 		}
 		
 	}
@@ -109,37 +97,33 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 	private void createSameAsListSPX(Topic sTopic) {
 		statements.add(statementFactory.create(sTopic, RDFS.SEEALSO, tm
 				.getLocator().toExternalForm()
-				+ "t/"
+				+ DATASLOT
 				+ getBestLocatorString(sTopic)));
 	}
 
 	private void createSameAsListXPO(Locator obj) {
-		String s = obj.toExternalForm();
-		
+		String s = obj.toExternalForm();		
 		int i = s.lastIndexOf(tm.getLocator().toExternalForm());
-		
-		
-		System.err.println(s.substring(i));
+
 		Topic t = tmapiStatementIteratior.getTopic(tm.createLocator(s.substring(i)), tm);
 		if (t != null)
 			statements.add(statementFactory.create(t, RDFS.SEEALSO, s));
 	}
 
-	private void createTypeSameAsSPO(Topic sTopic, Locator l) {
-		// System.out.println(statementFactory.getBestLocator(sTopic) + "mit " +
-		// statementFactory.getBestLocator(oTopic));
+	private void createTypeSameAsSPO(Topic sTopic, ObjectTopic oTopic) {
+		statements.add(statementFactory.create(sTopic, RDFS.SEEALSO, oTopic.getURL()));
 	}
 	
 	public String getBestLocatorString(Topic t) {
 		Set<Locator> l;
 		l = t.getSubjectLocators();
 		if (!l.isEmpty())
-			return "sl:" + l.iterator().next().toExternalForm();
+			return SL + l.iterator().next().toExternalForm();
 		l = t.getSubjectIdentifiers();
 		if (!l.isEmpty())
-			return "si:" + l.iterator().next().toExternalForm();
+			return SI + l.iterator().next().toExternalForm();
 		l = t.getItemIdentifiers();
-		return "ii:" + l.iterator().next();
+		return II + l.iterator().next();
 	}
 
 

@@ -73,55 +73,55 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 
 
 	
-//	@Test
-//	public void testxxO() throws Exception {
-//		int i = 0;
-//		RepositoryResult<Statement> result;
-//		
-//		
-//		result = _con.getStatements( null,
-//				null, 
-//				_con
-//				.getValueFactory().createURI(
-//						"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1"),
-//						true);
-//		assertTrue(result.hasNext());
-//		Statement statement = result.next();
-//		if (statement.getPredicate().equals(RDFS.SEEALSO))
-//			i++;
-//		assertEquals("http://www.topicmapslab.de/test/base/bertsi1", statement
-//				.getSubject().stringValue());
-//		assertEquals("http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1", statement
-//				.getObject().stringValue());
-//		assertFalse(result.hasNext());
-//		assertEquals(1, i);
-//		
-//		result = _con.getStatements( null,
-//				null, 
-//				_con
-//				.getValueFactory().createURI(
-//						"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi_wrong"),
-//						true);
-//		assertFalse(result.hasNext());
-//		
-//		result = _con.getStatements( null,
-//				null, 
-//				_con
-//				.getValueFactory().createURI(
-//						"http://www.topicmapslab.de/test_wrong/base/t/si:http://www.topicmapslab.de/test/base/bertsi"),
-//						true);
-//		assertFalse(result.hasNext());
-//		
-//		
-//		result = _con.getStatements( null,
-//				null, 
-//				_con
-//				.getValueFactory().createURI(
-//						"http://www.topicmapslab.de/test/base/bertsi1"),
-//						true);
-//		assertEquals(1, result.asList().size());
-//
-//	}
+	@Test
+	public void testxxO() throws Exception {
+		int i = 0;
+		RepositoryResult<Statement> result;
+		
+		
+		result = _con.getStatements( null,
+				null, 
+				_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1"),
+						true);
+		assertTrue(result.hasNext());
+		Statement statement = result.next();
+		if (statement.getPredicate().equals(RDFS.SEEALSO))
+			i++;
+		assertEquals("http://www.topicmapslab.de/test/base/bertsi1", statement
+				.getSubject().stringValue());
+		assertEquals("http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1", statement
+				.getObject().stringValue());
+		assertFalse(result.hasNext());
+		assertEquals(1, i);
+		
+		result = _con.getStatements( null,
+				null, 
+				_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi_wrong"),
+						true);
+		assertFalse(result.hasNext());
+		
+		result = _con.getStatements( null,
+				null, 
+				_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test_wrong/base/t/si:http://www.topicmapslab.de/test/base/bertsi"),
+						true);
+		assertFalse(result.hasNext());
+		
+		
+		result = _con.getStatements( null,
+				null, 
+				_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/bertsi1"),
+						true);
+		assertEquals(1, result.asList().size());
+
+	}
 	
 	
 	
@@ -192,6 +192,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 			i++;
 		assertEquals("http://www.topicmapslab.de/test/base/bertsi1", statement
 				.getSubject().stringValue());
+		
 		assertFalse(result.hasNext());
 		assertEquals(1, i);
 		
@@ -226,6 +227,52 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 	}
 
 
+	@Test
+	public void testSxO() throws Exception {
+		RepositoryResult<Statement> result = _con.getStatements(_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/bertsi1"), 
+						null,
+						_con.getValueFactory().createURI(
+										"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1")
+										, true);
+		assertTrue(result.hasNext());
+		
+		Statement statement = result.next();
+		assertEquals(RDFS.SEEALSO, statement.getPredicate());
+		assertFalse(result.hasNext());
+		result = _con.getStatements(_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/bertsi6"), RDFS.SEEALSO,
+				null, true);
+		assertFalse(result.hasNext());
+		_con.getStatements(_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/bertsi1"), RDFS.CONTAINER,
+				null, true);
+		assertFalse(result.hasNext());
+		
+		result = _con.getStatements(_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/bertsi1"), 
+						null,
+						_con.getValueFactory().createURI(
+										"http://www.topicmapslab.de/test/base/t/si:httdp://www.topicmapslab.de/test/base/bertsi1")
+										, true);
+		assertFalse(result.hasNext());
+		
+		
+		result = _con.getStatements(_con
+				.getValueFactory().createURI(
+						"http://www.topicmapslab.de/test/base/bertsi1"), 
+						null,
+						_con.getValueFactory().createURI(
+										"http://www.topicmdapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1")
+										, true);
+		assertFalse(result.hasNext());
+
+	}
+	
 
 	@Test
 	public void testxxx() throws Exception {
