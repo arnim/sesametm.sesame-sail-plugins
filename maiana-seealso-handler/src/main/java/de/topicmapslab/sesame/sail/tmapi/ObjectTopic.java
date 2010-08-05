@@ -41,6 +41,8 @@ public class ObjectTopic {
 			potentialLocator = extendedLocator.substring(3);
 		} catch (NullPointerException e) {
 			exists = false;
+		} catch (StringIndexOutOfBoundsException e) {
+			exists = false;
 		}
 	}
 

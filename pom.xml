@@ -38,12 +38,12 @@
 			<version>1.5.1</version>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>org.tinytim</groupId>
-            <artifactId>tinytim</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>de.topicmapslab.majortom</groupId>
+			<artifactId>majortom-inMemory</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.openrdf.sesame</groupId>
 			<artifactId>sesame-repository-sail</artifactId>

@@ -83,7 +83,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 				null, 
 				_con
 				.getValueFactory().createURI(
-						"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1"),
+						"http://www.topicmapslab.de/test/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "http://www.topicmapslab.de/test/base/bertsi1"),
 						true);
 		assertTrue(result.hasNext());
 		Statement statement = result.next();
@@ -91,7 +91,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 			i++;
 		assertEquals("http://www.topicmapslab.de/test/base/bertsi1", statement
 				.getSubject().stringValue());
-		assertEquals("http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1", statement
+		assertEquals("http://www.topicmapslab.de/test/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "http://www.topicmapslab.de/test/base/bertsi1", statement
 				.getObject().stringValue());
 		assertFalse(result.hasNext());
 		assertEquals(1, i);
@@ -100,7 +100,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 				null, 
 				_con
 				.getValueFactory().createURI(
-						"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi_wrong"),
+						"http://www.topicmapslab.de/test/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "http://www.topicmapslab.de/test/base/bertsi_wrong"),
 						true);
 		assertFalse(result.hasNext());
 		
@@ -108,7 +108,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 				null, 
 				_con
 				.getValueFactory().createURI(
-						"http://www.topicmapslab.de/test_wrong/base/t/si:http://www.topicmapslab.de/test/base/bertsi"),
+						"http://www.topicmapslab.de/test_wrong/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "http://www.topicmapslab.de/test/base/bertsi"),
 						true);
 		assertFalse(result.hasNext());
 		
@@ -119,6 +119,10 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 				.getValueFactory().createURI(
 						"http://www.topicmapslab.de/test/base/bertsi1"),
 						true);
+		
+		
+//		System.out.println(result.asList());
+		
 		assertEquals(1, result.asList().size());
 
 	}
@@ -134,22 +138,35 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 		result = _con.getStatements(null, RDFS.SEEALSO,
 				null, true);
 		assertTrue(result.hasNext());
-		assertEquals(RDFS.SEEALSO, result.next().getPredicate());
+		Statement next = result.next();
+		assertEquals(RDFS.SEEALSO, next.getPredicate());
+		assertTrue(next.getObject().stringValue().contains(MaianaSeeAlsoHandler.DATASLOT));
 		
 		assertTrue(result.hasNext());
-		assertEquals(RDFS.SEEALSO, result.next().getPredicate());
+		next = result.next();
+		assertEquals(RDFS.SEEALSO, next.getPredicate());
+		assertTrue(next.getObject().stringValue().contains(MaianaSeeAlsoHandler.DATASLOT));
+
 		
 		assertTrue(result.hasNext());
-		assertEquals(RDFS.SEEALSO, result.next().getPredicate());
+		next = result.next();
+		assertEquals(RDFS.SEEALSO, next.getPredicate());
+		assertTrue(next.getObject().stringValue().contains(MaianaSeeAlsoHandler.DATASLOT));
 		
 		assertTrue(result.hasNext());
-		assertEquals(RDFS.SEEALSO, result.next().getPredicate());
+		next = result.next();
+		assertEquals(RDFS.SEEALSO, next.getPredicate());
+		assertTrue(next.getObject().stringValue().contains(MaianaSeeAlsoHandler.DATASLOT));
 		
 		assertTrue(result.hasNext());
-		assertEquals(RDFS.SEEALSO, result.next().getPredicate());
+		next = result.next();
+		assertEquals(RDFS.SEEALSO, next.getPredicate());
+		assertTrue(next.getObject().stringValue().contains(MaianaSeeAlsoHandler.DATASLOT));
 		
 		assertTrue(result.hasNext());
-		assertEquals(RDFS.SEEALSO, result.next().getPredicate());
+		next = result.next();
+		assertEquals(RDFS.SEEALSO, next.getPredicate());
+		assertTrue(next.getObject().stringValue().contains(MaianaSeeAlsoHandler.DATASLOT));
 
 		assertFalse(result.hasNext());
 		
@@ -177,7 +194,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 		assertTrue(result.hasNext());
 		Statement statement = result.next();
 		if (statement.getPredicate().equals(RDFS.SEEALSO)){
-			assertEquals("http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1", statement
+			assertEquals("http://www.topicmapslab.de/test/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "http://www.topicmapslab.de/test/base/bertsi1", statement
 					.getObject().stringValue());
 			i++;
 			
@@ -234,7 +251,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 						"http://www.topicmapslab.de/test/base/bertsi1"), 
 						null,
 						_con.getValueFactory().createURI(
-										"http://www.topicmapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1")
+										"http://www.topicmapslab.de/test/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "http://www.topicmapslab.de/test/base/bertsi1")
 										, true);
 		assertTrue(result.hasNext());
 		
@@ -257,7 +274,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 						"http://www.topicmapslab.de/test/base/bertsi1"), 
 						null,
 						_con.getValueFactory().createURI(
-										"http://www.topicmapslab.de/test/base/t/si:httdp://www.topicmapslab.de/test/base/bertsi1")
+										"http://www.topicmapslab.de/test/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "httdp://www.topicmapslab.de/test/base/bertsi1")
 										, true);
 		assertFalse(result.hasNext());
 		
@@ -267,7 +284,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 						"http://www.topicmapslab.de/test/base/bertsi1"), 
 						null,
 						_con.getValueFactory().createURI(
-										"http://www.topicmdapslab.de/test/base/t/si:http://www.topicmapslab.de/test/base/bertsi1")
+										"http://www.topicmdapslab.de/test/base/" + MaianaSeeAlsoHandler.DATASLOT + MaianaSeeAlsoHandler.SI + "http://www.topicmapslab.de/test/base/bertsi1")
 										, true);
 		assertFalse(result.hasNext());
 

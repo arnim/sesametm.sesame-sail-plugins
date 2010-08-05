@@ -28,10 +28,10 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 	private TmapiStatementFactory statementFactory;
 	private TmapiStatementIterator<?> tmapiStatementIteratior;
 	
-	public final String DATASLOT = "t/";
-	public final String SI = "si:";
-	public final String SL = "sl:";
-	public final String II = "ii:";
+	public final static String DATASLOT = "datardf/";
+	public final static String SI = "si:";
+	public final static String SL = "sl:";
+	public final static String II = "ii:";
 
 	public MaianaSeeAlsoHandler(){
 		
