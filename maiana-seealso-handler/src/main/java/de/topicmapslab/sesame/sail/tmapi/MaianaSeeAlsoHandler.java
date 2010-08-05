@@ -23,10 +23,15 @@ import de.topicmapslab.sesame.sail.tmapi.utils.TmapiStatementIterator;
  */
 public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 	
-	private TopicMap tm;
+	TopicMap tm;
 	private Set<Statement> statements;
 	private TmapiStatementFactory statementFactory;
-	private TmapiStatementIterator<?> other;
+	private TmapiStatementIterator<?> tmapiStatementIteratior;
+	
+	public final String DATASLOT = "t/";
+	public final String SI = "si:";
+	public final String SL = "sl:";
+	public final String II = "ii:";
 
 	public MaianaSeeAlsoHandler(){
 		
@@ -34,29 +39,34 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 
 	@Override
 	public void evaluate(Locator subj, Locator pred, Locator obj, TopicMap tm,
-			TmapiStatementIterator<?> other) {
+			TmapiStatementIterator<?> tmapiStatementIteratior) {
 		
 		this.tm = tm;
-		this.statements = other.getStatements();
-		this.statementFactory = other.getStatementFactory();
-		this.other = other;
+		this.statements = tmapiStatementIteratior.getStatements();
+		this.statementFactory = tmapiStatementIteratior.getStatementFactory();
+		this.tmapiStatementIteratior = tmapiStatementIteratior;
 		
-		
+//		System.out.println("hir............");
+//		System.out.println(subj);
+//		System.out.println(pred);
+//		System.out.println(obj);
+//		System.out.println(tm.getLocator().toExternalForm());
+
 		
 
-		Topic sTopic = null, pTopic = null, oTopic = null;
-		sTopic = other.getTopic(subj, tm);
-		pTopic = other.getTopic(pred, tm);
-		oTopic = other.getTopic(obj, tm);
+		Topic sTopic = null, oTopic = null;
+		sTopic = tmapiStatementIteratior.getTopic(subj, tm);
+		oTopic = tmapiStatementIteratior.getTopic(obj, tm);
+		
+		ObjectTopic objectTopic = new ObjectTopic(this, obj);
+//		System.out.println(objectTopic.getURL() + " ist da " + objectTopic.exists());
 
-		if (sTopic == null
-				&& subj != null
-				|| pred != null
-				&& (pTopic == null && !RDFS.SEEALSO.toString().equals(
-						pred.toExternalForm()))
-				|| obj != null
-				&& (oTopic == null && !obj.toExternalForm().contains(
-						tm.getLocator().toExternalForm()))) {
+		if (	(pred != null && !RDFS.SEEALSO.toString().equals(pred.toExternalForm()))
+				
+				|| (subj != null && sTopic == null )
+				
+				|| (obj != null && objectTopic.exists())
+						) {
 
 			// Q has no match in this tm
 		} else {
@@ -72,13 +82,10 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 							tm.getLocator().toExternalForm())))
 				createSameAsListSPX(sTopic);
 			else if (sTopic == null
-					&& (obj != null && obj.toExternalForm().contains(
-							tm.getLocator().toExternalForm() 
-							+ "t/"))) {
+					&& objectTopic.exists()) {
 				createSameAsListXPO(obj);
 			} else if (sTopic != null
-					&& (obj != null && obj.toExternalForm().contains(
-							tm.getLocator().toExternalForm())))
+					&& objectTopic.exists())
 				createTypeSameAsSPO(sTopic, obj);
 			
 			else if (subj == null
@@ -103,14 +110,17 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 		statements.add(statementFactory.create(sTopic, RDFS.SEEALSO, tm
 				.getLocator().toExternalForm()
 				+ "t/"
-				+ statementFactory.getBestLocator(sTopic).toExternalForm()));
+				+ getBestLocatorString(sTopic)));
 	}
 
 	private void createSameAsListXPO(Locator obj) {
-		
 		String s = obj.toExternalForm();
+		
 		int i = s.lastIndexOf(tm.getLocator().toExternalForm());
-		Topic t = other.getTopic(tm.createLocator(s.substring(i)), tm);
+		
+		
+		System.err.println(s.substring(i));
+		Topic t = tmapiStatementIteratior.getTopic(tm.createLocator(s.substring(i)), tm);
 		if (t != null)
 			statements.add(statementFactory.create(t, RDFS.SEEALSO, s));
 	}
@@ -118,6 +128,18 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 	private void createTypeSameAsSPO(Topic sTopic, Locator l) {
 		// System.out.println(statementFactory.getBestLocator(sTopic) + "mit " +
 		// statementFactory.getBestLocator(oTopic));
+	}
+	
+	public String getBestLocatorString(Topic t) {
+		Set<Locator> l;
+		l = t.getSubjectLocators();
+		if (!l.isEmpty())
+			return "sl:" + l.iterator().next().toExternalForm();
+		l = t.getSubjectIdentifiers();
+		if (!l.isEmpty())
+			return "si:" + l.iterator().next().toExternalForm();
+		l = t.getItemIdentifiers();
+		return "ii:" + l.iterator().next();
 	}
 
 
