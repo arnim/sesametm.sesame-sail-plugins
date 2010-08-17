@@ -31,6 +31,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 	private static Repository _tmapiRepository;
 	private static RepositoryConnection _con;
 	private static TopicMapSystem _tms;
+	private static TopicMap _tm;
 
 	final static String baseIRI = "http://www.topicmapslab.de/test/base/";
 
@@ -38,23 +39,23 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		_tms = TopicMapSystemFactory.newInstance().newTopicMapSystem();
-		TopicMap tm = _tms.createTopicMap(baseIRI);
-		Topic xyz = tm.createTopicBySubjectIdentifier(tm.createLocator(baseIRI
+		_tm = _tms.createTopicMap(baseIRI);
+		Topic xyz = _tm.createTopicBySubjectIdentifier(_tm.createLocator(baseIRI
 				+ "xyz"));
-		Topic worksFor = tm.createTopicBySubjectIdentifier(tm
+		Topic worksFor = _tm.createTopicBySubjectIdentifier(_tm
 				.createLocator(baseIRI + "worksFor"));
-		Topic employer = tm.createTopicBySubjectIdentifier(tm
+		Topic employer = _tm.createTopicBySubjectIdentifier(_tm
 				.createLocator(baseIRI + "employer"));
-		Topic employee = tm.createTopicBySubjectIdentifier(tm
+		Topic employee = _tm.createTopicBySubjectIdentifier(_tm
 				.createLocator(baseIRI + "employee"));
 
-		Topic alf = tm.createTopicBySubjectIdentifier(tm.createLocator(baseIRI
+		Topic alf = _tm.createTopicBySubjectIdentifier(_tm.createLocator(baseIRI
 				+ "alfsi1"));
-		Topic bert = tm.createTopicBySubjectIdentifier(tm.createLocator(baseIRI
+		Topic bert = _tm.createTopicBySubjectIdentifier(_tm.createLocator(baseIRI
 				+ "bertsi1"));
 
-		Association awf = tm.createAssociation(worksFor);
-		Association bwf = tm.createAssociation(worksFor);
+		Association awf = _tm.createAssociation(worksFor);
+		Association bwf = _tm.createAssociation(worksFor);
 
 		awf.createRole(employee, alf);
 		awf.createRole(employer, xyz);
@@ -307,6 +308,17 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 				
 		}
 		assertEquals(6, i);
+	}
+	
+	
+	@Test
+	public void testII() throws Exception {
+		_tm.createTopicByItemIdentifier(_tm.createLocator("http://maiana-dev.topicmapslab.de/u/lmaicher/tm/opera/#messenger2"));
+		RepositoryResult<Statement> result = _con.getStatements(_con
+				.getValueFactory().createURI(
+				"http://maiana-dev.topicmapslab.de/u/lmaicher/tm/opera/#messenger2"), null,
+				null, true);
+		System.out.println(result.asList());
 	}
 
 

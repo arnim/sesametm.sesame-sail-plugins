@@ -123,7 +123,8 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 		if (!l.isEmpty())
 			return SI + l.iterator().next().toExternalForm();
 		l = t.getItemIdentifiers();
-		return II + l.iterator().next();
+		String fullII = l.iterator().next().toExternalForm();
+		return II + "%23" + fullII.substring(fullII.lastIndexOf('#')+1);
 	}
 
 
