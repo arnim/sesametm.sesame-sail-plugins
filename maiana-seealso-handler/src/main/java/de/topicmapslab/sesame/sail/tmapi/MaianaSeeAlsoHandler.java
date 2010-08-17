@@ -5,6 +5,9 @@
 
 package de.topicmapslab.sesame.sail.tmapi;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -122,9 +125,13 @@ public class MaianaSeeAlsoHandler implements SailTmapiPlugin {
 		l = t.getSubjectIdentifiers();
 		if (!l.isEmpty())
 			return SI + l.iterator().next().toExternalForm();
-		l = t.getItemIdentifiers();
-		String fullII = l.iterator().next().toExternalForm();
-		return II + "%23" + fullII.substring(fullII.lastIndexOf('#')+1);
+		l = t.getItemIdentifiers();		
+		try {
+			return II + URLEncoder.encode(l.iterator().next().toExternalForm(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

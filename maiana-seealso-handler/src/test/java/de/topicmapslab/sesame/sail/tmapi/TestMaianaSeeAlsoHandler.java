@@ -318,7 +318,8 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 				.getValueFactory().createURI(
 				"http://maiana-dev.topicmapslab.de/u/lmaicher/tm/opera/#messenger2"), null,
 				null, true);
-		System.out.println(result.asList());
+		
+		assertEquals(1, result.asList().size());
 	}
 
 
