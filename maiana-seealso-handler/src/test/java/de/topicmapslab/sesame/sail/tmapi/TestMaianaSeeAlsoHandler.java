@@ -64,8 +64,6 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 		bwf.createRole(employer, xyz);
 		
 		
-		
-		
 		_sail = new TmapiStore(_tms);
 		_tmapiRepository = new SailRepository(_sail);
 		_tmapiRepository.initialize();
