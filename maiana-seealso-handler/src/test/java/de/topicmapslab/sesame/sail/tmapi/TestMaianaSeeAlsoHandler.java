@@ -66,7 +66,7 @@ public class TestMaianaSeeAlsoHandler extends TestCase {
 		
 		
 		
-		_sail = new TmapiStore(_tms, CONFIG.LIVE);
+		_sail = new TmapiStore(_tms);
 		_tmapiRepository = new SailRepository(_sail);
 		_tmapiRepository.initialize();
 		_con = _tmapiRepository.getConnection();
