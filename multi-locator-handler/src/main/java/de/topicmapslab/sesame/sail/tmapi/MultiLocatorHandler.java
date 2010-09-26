@@ -54,7 +54,7 @@ public class MultiLocatorHandler implements SailTmapiPlugin {
 			} else {
 				if (sTopic == null && oTopic == null && pTopic == null && pred != null && pred.toExternalForm().equals(OWL.SAMEAS.stringValue()))
 					createSameAsListxPx();
-				else if (sTopic != null && oTopic == null )
+				else if (sTopic != null && oTopic == null && pred != null && pred.toExternalForm().equals(OWL.SAMEAS.stringValue()))
 					createSameAsListSPX(sTopic);
 				else if (sTopic == null && oTopic != null)
 					createSameAsListXPO(oTopic);
@@ -62,10 +62,17 @@ public class MultiLocatorHandler implements SailTmapiPlugin {
 					createTypeSameAsSPO(sTopic, oTopic);
 				else if (sTopic == null && oTopic == null &&  pred == null )
 					createSameAsListxPx();
+				
+				
+				else if (sTopic != null && oTopic == null && pred == null)
+					createSameAsListSPX(sTopic);
 			}
 		
 	}
 	
+
+	
+
 	
 	private void createSameAsListxPx(){
 		
